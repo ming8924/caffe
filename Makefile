@@ -118,7 +118,7 @@ LIBRARIES := cudart cublas curand \
 	glog protobuf leveldb snappy \
 	boost_system \
 	hdf5_hl hdf5 \
-	opencv_core opencv_highgui opencv_imgproc
+	opencv_core opencv_highgui opencv_imgproc opencv_imgcodecs
 PYTHON_LIBRARIES := boost_python python2.7
 WARNINGS := -Wall
 
@@ -271,7 +271,7 @@ $(MAT$(PROJECT)_SO): $(MAT$(PROJECT)_SRC) $(STATIC_NAME)
 	fi
 	$(MATLAB_DIR)/bin/mex $(MAT$(PROJECT)_SRC) $(STATIC_NAME) \
 			CXXFLAGS="\$$CXXFLAGS $(CXXFLAGS) $(WARNINGS)" \
-			CXXLIBS="\$$CXXLIBS $(LDFLAGS)" -o $@
+			$(CXXLIBS) $(LDFLAGS) -v -output $@
 	@ echo
 
 runtest: $(TEST_ALL_BIN)
